@@ -22,6 +22,7 @@
   --butter: #FFD98A;
   --butter-tint: #FFF6DC;
   --pink-tint: #FDE8EF;
+  --footer-bg: #F3F3F5;
 
   --bg: #ffffff;
   --bg-tint: #F7F5FA;
@@ -49,6 +50,7 @@
     --lavender-tint: #352b45;
     --butter-tint: #3d3629;
     --pink-tint: #4a2f48;
+    --footer-bg: #241a25;
 
     --bg: #2b1a2a;
     --bg-tint: #32243a;
@@ -155,11 +157,14 @@ pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
 .site-nav a.active { border-bottom-color: var(--pink); color: var(--pink); }
 
 /* ---------- footer ---------- */
-.site-footer { border-top: 1px solid var(--border); margin-top: 3rem; padding: .9rem 0; background: var(--lavender-tint); color: var(--text-muted); font-size: .88rem; }
+.site-footer { border-top: 1px solid var(--border); margin-top: 3rem; padding: .9rem 0; background: var(--footer-bg); color: var(--text-muted); font-size: .88rem; }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1.5rem; }
 .footer-brand { display: inline-flex; align-items: center; gap: .4rem; font-weight: 800; letter-spacing: .04em; color: var(--text); font-size: .95rem; }
 .footer-brand img { width: 30px; height: 20px; opacity: .85; }
 .footer-links { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 0; }
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--text); }
+.footer-brand img { filter: grayscale(1); opacity: .6; }
 
 /* ---------- buttons ---------- */
 .btn {
