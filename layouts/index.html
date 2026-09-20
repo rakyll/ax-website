@@ -7,7 +7,7 @@
       <img class="hero-logo" src='{{ "axolotl.svg" | relURL }}' alt="AX's pink axolotl mascot" width="210" height="140">
       <h1>Declare an agentic task. <span class="accent">AX runs it at scale.</span></h1>
       <p class="lede">AX sandboxes your task, wires up its workspace, fences its network, and helps you run billions of
-        them per cluster. Start with one task, then compose as many as your agents need.</p>
+        them per cluster. Either use a single task per agent, or compose as many as your agent needs.</p>
       <div class="cta">
         <a class="btn btn-primary" href="{{ .Site.Params.github }}#quick-start" rel="noopener">Get started</a>
         <a class="btn btn-ghost" href="{{ .Site.Params.github }}" rel="noopener"><svg width="18" height="18"
@@ -119,14 +119,14 @@
     <p class="eyebrow">About</p>
     <h2>Research meets production at Google.</h2>
     <p class="lede narrow">AX was born at Google when agentic runtime systems research met frontier compute. Over years
-      of building and operating distributed execution engines, teams across Google recognized that agentic workloads
+      of building and operating agentic execution engines, teams across Google recognized that agentic workloads
       represent an entirely new computing paradigm: stateful, bursty, long-running actors that compute intensely for a
       minute and then wait for tool responses or human approval. Traditional orchestrators built for stateless
       microservices or predictable batch jobs become cost-prohibitive when keeping idle sandboxes running, yet lack
       native support for sub-second suspend and resume.</p>
     <p class="lede narrow">Drawing on agentic runtime research from Google DeepMind alongside deep experience in
       large-scale isolation, resumption, and scheduling, AX was architected as an open, declarative control plane
-      purpose-built for agent execution. It abstracts tasks, workspaces, network policies, and models into declarative
+      purpose-built for agent execution. It abstracts tasks, workspaces, network policies, and models into core
       primitives so developers and researchers can run massive fleets of agents without reinventing the underlying
       infrastructure.</p>
   </div>
