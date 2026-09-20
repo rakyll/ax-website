@@ -84,21 +84,19 @@
     <p class="eyebrow">How it works</p>
     <h2>Built for billions of tasks, not thousands.</h2>
     <p class="lede narrow">AX runs on top of <a href="{{ .Site.Params.substrate }}" rel="noopener">Agent Substrate</a>,
-      a compute runtime that scales to billions of actors in a single cluster. Many tasks are multiplexed onto each
-      worker, and idle ones are suspended and resumed in under a second, so you pay for the agents that are actually
-      thinking.</p>
-    <div class="scale-grid">
-      <div class="scale">
-        <strong>Billions of actors</strong>
-        <p>Per cluster. Every task is a lightweight actor, not a pod.</p>
+      a compute runtime designed from the ground up for massive density and fast stateful actor lifecycles.</p>
+    <div class="flow-grid">
+      <div class="flow-card">
+        <strong>Billions of tasks</strong>
+        <p>Every task runs as an ultra-lightweight actor rather than a heavy container pod, allowing you to scale to billions of concurrent agent sessions per cluster without orchestrator limits.</p>
       </div>
-      <div class="scale">
-        <strong>Sub-second suspend and resume</strong>
-        <p>Idle agents are checkpointed and brought back exactly where they left off.</p>
+      <div class="flow-card">
+        <strong>Sub-second lifecycle</strong>
+        <p>Idle agents waiting on external tool calls or human responses are checkpointed, suspended, and brought back in under a second with zero cold-start delay.</p>
       </div>
-      <div class="scale">
-        <strong>Many tasks per worker</strong>
-        <p>Dense multiplexing turns waiting agents into spare capacity for the rest.</p>
+      <div class="flow-card">
+        <strong>Dense multiplexing</strong>
+        <p>Dozens of tasks share worker resources, turning idle waiting time into spare compute capacity so you only pay when agents are actively thinking and running code.</p>
       </div>
     </div>
   </div>

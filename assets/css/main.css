@@ -384,10 +384,33 @@ pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
 @keyframes blink { to { visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) { .term .cursor { animation: none; } }
 
-/* ---------- scale facts ---------- */
+/* ---------- flow section ---------- */
 .section.flow { background: var(--aqua-tint); }
 .section.flow .lede { color: var(--text); opacity: .85; }
-.scale-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-top: 2.5rem; }
-.scale { padding: 1.5rem; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--aqua-soft); }
-.scale strong { display: block; font-size: 1.2rem; line-height: 1.25; color: var(--aqua-deep); margin-bottom: .5rem; letter-spacing: -0.01em; }
-.scale p { margin: 0; color: var(--text-muted); font-size: .97rem; }
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.flow-card {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--aqua-soft);
+  box-shadow: 0 10px 28px -12px rgba(35, 127, 163, .22), 0 2px 6px -2px rgba(67, 43, 65, .04);
+}
+.flow-card strong {
+  display: block;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  color: var(--aqua-deep);
+  margin-bottom: .5rem;
+  letter-spacing: -0.01em;
+}
+.flow-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: .95rem;
+  line-height: 1.5;
+}
