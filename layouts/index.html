@@ -25,15 +25,22 @@
 <span class="out">task.ax.io/test created</span>
 <span class="prompt">$</span> <span class="cmd">ax watch task test</span>
 <span class="out">Watching task default/test...</span>
-<span class="out">[10:42:01] Phase: Pending    Actor: test  WorkerIP:</span>
-<span class="out">[10:42:06] Phase: Running    Actor: test  WorkerIP: 10.20.3.67</span>
+<span class="out">[10:42:01.100] Phase: Pending    Actor: test  WorkerIP:</span>
+<span class="out">[10:42:01.600] Phase: Running    Actor: test  WorkerIP: 10.20.3.67</span>
 <span class="out">Task reached terminal phase "Running".</span>
 <span class="prompt">$</span> <span class="cmd">ax ssh test -- ps -o pid,cmd</span>
 <span class="out">  PID CMD</span>
 <span class="out">    1 /usr/local/bin/ax-task-runner</span>
 <span class="out">   12 python agent.py</span>
+<span class="prompt">$</span> <span class="cmd">ax ssh test -- touch notes.txt</span>
 <span class="prompt">$</span> <span class="cmd">ax suspend task test</span>
 <span class="out">task.ax.io/test suspended</span>
+<span class="prompt">$</span> <span class="cmd">ax resume task test</span>
+<span class="out">task.ax.io/test resumed</span>
+<span class="prompt">$</span> <span class="cmd">ax ssh test -- ls notes.txt</span>
+<span class="out">notes.txt</span>
+<span class="prompt">$</span> <span class="cmd">ax delete task test</span>
+<span class="out">task.ax.io/test deleted</span>
 </code></pre>
       </div>
     </div>
@@ -124,16 +131,35 @@
       {
         cmd: 'ax watch task test',
         out: ['Watching task default/test...',
-          '[10:42:01] Phase: Pending    Actor: test  WorkerIP:',
-          '[10:42:06] Phase: Running    Actor: test  WorkerIP: 10.20.3.67',
+          '[10:42:01.100] Phase: Pending    Actor: test  WorkerIP:',
+          '[10:42:01.600] Phase: Running    Actor: test  WorkerIP: 10.20.3.67',
           'Task reached terminal phase "Running".'],
-        slow: [0, 1200, 2200, 200]
+        slow: [0, 400, 500, 200]
       },
       {
         cmd: 'ax ssh test -- ps -o pid,cmd',
         out: ['  PID CMD', '    1 /usr/local/bin/ax-task-runner', '   12 python agent.py']
       },
-      { cmd: 'ax suspend task test', out: ['task.ax.io/test suspended'] }
+      {
+        cmd: 'ax ssh test -- touch notes.txt',
+        out: []
+      },
+      {
+        cmd: 'ax suspend task test',
+        out: ['task.ax.io/test suspended']
+      },
+      {
+        cmd: 'ax resume task test',
+        out: ['task.ax.io/test resumed']
+      },
+      {
+        cmd: 'ax ssh test -- ls notes.txt',
+        out: ['notes.txt']
+      },
+      {
+        cmd: 'ax delete task test',
+        out: ['task.ax.io/test deleted']
+      }
     ];
 
     var code = el.querySelector('code');

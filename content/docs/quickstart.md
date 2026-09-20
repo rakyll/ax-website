@@ -47,7 +47,7 @@ spec:
   workspaces:
     - name: golang
       goal: "Ensure that Go tool chain is available and is built from source"
-  debug: true   # lets you `ax ssh` into the sandbox
+  debug: true   # enable ssh'ing
 ```
 
 Then apply it, watch it come up, and look over the agent's shoulder:

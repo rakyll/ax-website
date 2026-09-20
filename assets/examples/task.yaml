@@ -6,4 +6,4 @@ metadata:
 spec:
   image: ghcr.io/my-org/my-agent
   command: ["python", "agent.py"]
-  debug: true   # lets you `ax ssh` into the sandbox
+  debug: true   # enable ssh'ing
