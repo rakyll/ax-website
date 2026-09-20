@@ -8,7 +8,7 @@
         height="140">
       <h1>Declare an agentic task. <span class="accent">AX runs it at scale.</span></h1>
       <p class="lede">AX sandboxes your task, wires up its workspace, fences its network, and helps you run billions of
-        them per cluster. If you have used <code>kubectl</code>, you already know how to use <code>ax</code>.</p>
+        them per cluster. Build and compose any agentic application with tasks.</p>
       <div class="cta">
         <a class="btn btn-primary" href="{{ .Site.Params.github }}#quick-start" rel="noopener">Get started</a>
         <a class="btn btn-ghost" href="{{ .Site.Params.github }}" rel="noopener">View on GitHub</a>
@@ -83,7 +83,10 @@
   <div class="wrap">
     <p class="eyebrow">How it works</p>
     <h2>Built for billions of tasks, not thousands.</h2>
-    <p class="lede narrow">AX runs on top of <a href="{{ .Site.Params.substrate }}" rel="noopener">Agent Substrate</a>, a runtime that scales to billions of actors in a single cluster. Many tasks are multiplexed onto each worker, and idle ones are suspended and resumed in under a second, so you pay for the agents that are actually thinking.</p>
+    <p class="lede narrow">AX runs on top of <a href="{{ .Site.Params.substrate }}" rel="noopener">Agent Substrate</a>,
+      a compute runtime that scales to billions of actors in a single cluster. Many tasks are multiplexed onto each
+      worker, and idle ones are suspended and resumed in under a second, so you pay for the agents that are actually
+      thinking.</p>
     <div class="scale-grid">
       <div class="scale">
         <strong>Billions of actors</strong>
@@ -121,8 +124,10 @@
           'Task reached terminal phase "Running".'],
         slow: [0, 1200, 2200, 200]
       },
-      { cmd: 'ax ssh test -- ps -o pid,cmd',
-        out: ['  PID CMD', '    1 /usr/local/bin/ax-task-runner', '   12 python agent.py'] },
+      {
+        cmd: 'ax ssh test -- ps -o pid,cmd',
+        out: ['  PID CMD', '    1 /usr/local/bin/ax-task-runner', '   12 python agent.py']
+      },
       { cmd: 'ax suspend task test', out: ['task.ax.io/test suspended'] }
     ];
 
