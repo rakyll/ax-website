@@ -268,19 +268,25 @@ pre code { background: none; padding: 0; font-size: inherit; color: inherit; }
   background: var(--surface); border: 1px solid var(--border); color: var(--text);
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
-.feature:hover { text-decoration: none; color: var(--text); transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--pink-soft); }
-.feature .kind {
-  display: inline-block; font-family: var(--mono); font-size: .8rem; font-weight: 700;
-  color: var(--pink); background: var(--inline-code-bg); padding: .2rem .6rem; border-radius: 999px; margin-bottom: 1rem;
+.feature:hover {
+  text-decoration: none;
+  color: var(--text);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px -8px rgba(79, 179, 217, 0.28), 0 2px 8px -2px rgba(35, 127, 163, 0.1);
+  border-color: #b5d8e7;
 }
-.feature.task .kind { color: var(--pink); background: var(--pink-tint); }
-.feature.workspace .kind { color: var(--aqua-deep); background: var(--aqua-tint); }
-.feature.gateway .kind { color: #6f56a3; background: var(--lavender-tint); }
-.feature.model .kind { color: #9a6b00; background: var(--butter-tint); }
-.feature.task:hover { border-color: var(--pink-soft); }
-.feature.workspace:hover { border-color: var(--aqua-soft); }
-.feature.gateway:hover { border-color: var(--lavender); }
-.feature.model:hover { border-color: var(--butter); }
+.feature .kind {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--bg-tint);
+  border: 1px solid var(--border);
+  padding: .2rem .65rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
 .feature h3 { margin-bottom: .4rem; }
 .feature p { margin: 0; color: var(--text-muted); font-size: .97rem; }
 
