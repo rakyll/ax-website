@@ -3,6 +3,7 @@ title: Architecture
 description: How the control plane fits together, plus the gRPC API reference.
 weight: 80
 group: Internals
+source: DESIGN.md
 ---
 
 Storing millions of short-lived tasks as Kubernetes CRDs pushes etcd past its comfort zone (single-digit GB storage limits, write-rate bottlenecks, control plane degradation). AX keeps its state in Redis and uses Redis Streams as the work queue between the API server and a horizontally scaled pool of controllers.

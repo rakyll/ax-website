@@ -3,6 +3,7 @@ title: Runners
 description: The contract between the control plane and the task container, and how to build your own runner image.
 weight: 60
 group: Guides
+source: docs/runner.md
 ---
 
 A runner is the program that AX starts as PID 1 inside every task container. It is the bridge between the control plane and whatever your agent actually is: the controller hands it the `Task` and `Workspace` specs, and the runner turns them into a prepared workspace, a running command, and a small HTTP surface that the rest of AX uses to observe the sandbox.

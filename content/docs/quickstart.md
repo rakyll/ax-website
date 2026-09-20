@@ -3,6 +3,7 @@ title: Quick start
 description: Install the CLI, deploy the control plane, and run your first sandboxed task.
 weight: 10
 group: Start here
+source: README.md#quick-start
 ---
 
 ## 1. Install the CLI

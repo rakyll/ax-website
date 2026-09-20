@@ -3,6 +3,7 @@ title: Sandbox
 description: What the runner does on boot and what your command can rely on, including the metadata server, guest services, and environment.
 weight: 50
 group: Guides
+source: docs/sandbox.md
 ---
 
 Every task container starts with `ax-task-runner` as PID 1. On boot it:

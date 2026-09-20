@@ -14,4 +14,4 @@
 <link rel="icon" href="{{ "axolotl.svg" | relURL }}" type="image/svg+xml">
 <link rel="canonical" href="{{ .Permalink }}">
 {{- $css := resources.Get "css/main.css" | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">

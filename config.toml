@@ -2,6 +2,7 @@ baseURL = "/"
 languageCode = "en-us"
 title = "AX"
 enableRobotsTXT = true
+relativeURLs = true   # emit relative asset paths so public/ works from disk or under any subpath
 disableKinds = ["taxonomy", "term"]
 
 [params]

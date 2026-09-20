@@ -3,6 +3,7 @@ title: CLI reference
 description: Every ax verb, how it follows your kube context, and the global flags.
 weight: 30
 group: Start here
+source: README.md#cli-usage
 ---
 
 `ax` talks to the control plane over gRPC. It is deliberately `kubectl`-shaped: `apply`, `get`, `describe`, `watch`, `delete`, plus a few agent-specific verbs.

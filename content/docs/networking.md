@@ -3,6 +3,7 @@ title: Networking
 description: Reach a running task through the atenet router from the cluster, your laptop, or a gRPC client.
 weight: 70
 group: Guides
+source: docs/networking.md
 ---
 
 Tasks do not get a Kubernetes Service or Ingress of their own. Every request to a task goes through Agent Substrate's **atenet router**, the `atenet-router` Service in the `ate-system` namespace. The router reads a single header, `ate-target-actor`, resolves the actor to the worker it is running on, resumes it first if it was suspended, and proxies the request there. `Host` and `:authority` are left alone for your application; the header alone selects the target.

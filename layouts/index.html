@@ -1,35 +1,16 @@
 {{ define "main" }}
-{{- $yaml := `# task.yaml
-apiVersion: ax.io/v1alpha1
-kind: Workspace
-metadata:
-  name: golang
-spec:
-  git:
-    - repo: https://github.com/golang/go.git
-      branch: "my-fix"
----
-apiVersion: ax.io/v1alpha1
-kind: Task
-metadata:
-  name: test
-spec:
-  workspaces:
-    - name: golang
-      goal: "Ensure that Go tool chain is available and is built from source"
-  debug: true   # lets you ax ssh into the sandbox` -}}
-{{- $bash := `ax apply -f task.yaml
-ax watch task test
-ax ssh test -- ls -al /workspace` -}}
+{{- $yaml := (resources.Get "examples/task.yaml").Content -}}
 
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <img class="hero-logo" src="{{ "axolotl.svg" | relURL }}" alt="AX's pink axolotl mascot" width="210" height="140">
+      <img class="hero-logo" src="{{ "axolotl.svg" | relURL }}" alt="AX's pink axolotl mascot" width="210"
+        height="140">
       <h1>Declare an agentic task. <span class="accent">AX runs it at scale.</span></h1>
-      <p class="lede">AX sandboxes your task, wires up its workspace, fences its network, and helps you run billions of them per cluster. If you have used <code>kubectl</code>, you already know how to use <code>ax</code>.</p>
+      <p class="lede">AX sandboxes your task, wires up its workspace, fences its network, and helps you run billions of
+        them per cluster. If you have used <code>kubectl</code>, you already know how to use <code>ax</code>.</p>
       <div class="cta">
-        <a class="btn btn-primary" href="{{ "docs/quickstart/" | relURL }}">Get started</a>
+        <a class="btn btn-primary" href="{{ .Site.Params.github }}#quick-start" rel="noopener">Get started</a>
         <a class="btn btn-ghost" href="{{ .Site.Params.github }}" rel="noopener">View on GitHub</a>
       </div>
       <div class="install"><span class="prompt">$</span><code>go install github.com/google/ax/cmd/ax@latest</code></div>
@@ -39,9 +20,22 @@ ax ssh test -- ls -al /workspace` -}}
         <div class="window-bar"><span></span><span></span><span></span><em>task.yaml</em></div>
         {{ highlight $yaml "yaml" "" }}
       </div>
-      <div class="window">
+      <div class="window window-term">
         <div class="window-bar"><span></span><span></span><span></span><em>shell</em></div>
-        {{ highlight $bash "bash" "" }}
+        <pre class="term" id="term" aria-live="off"><code><span class="prompt">$</span> <span class="cmd">ax apply -f task.yaml</span>
+<span class="out">task.ax.io/test created</span>
+<span class="prompt">$</span> <span class="cmd">ax watch task test</span>
+<span class="out">Watching task default/test...</span>
+<span class="out">[10:42:01] Phase: Pending    Actor: test  WorkerIP:</span>
+<span class="out">[10:42:06] Phase: Running    Actor: test  WorkerIP: 10.20.3.67</span>
+<span class="out">Task reached terminal phase "Running".</span>
+<span class="prompt">$</span> <span class="cmd">ax ssh test -- ps -o pid,cmd</span>
+<span class="out">  PID CMD</span>
+<span class="out">    1 /usr/local/bin/ax-task-runner</span>
+<span class="out">   12 python agent.py</span>
+<span class="prompt">$</span> <span class="cmd">ax suspend task test</span>
+<span class="out">task.ax.io/test suspended</span>
+</code></pre>
       </div>
     </div>
   </div>
@@ -51,45 +45,37 @@ ax ssh test -- ls -al /workspace` -}}
   <div class="wrap">
     <p class="eyebrow">Why AX</p>
     <h2>Agents are a new kind of workload.</h2>
-    <p class="lede narrow">They are neither stateless microservices nor run-to-completion batch jobs. They accumulate state, need strict isolation, call out to model APIs and tool servers, and can burn money in a loop if nobody is watching. AX gives you four small primitives that handle all of that declaratively.</p>
+    <p class="lede narrow">They are neither stateless microservices nor run-to-completion batch jobs. They accumulate
+      state, need strict isolation, call out to model APIs and tool servers, and can burn money in a loop if nobody is
+      watching. AX gives you four small primitives that handle all of that declaratively.</p>
 
     <div class="feature-grid">
-      <a class="feature" href="{{ "docs/concepts/#task" | relURL }}">
+      <a class="feature" href="{{ .Site.Params.github }}/blob/main/docs/concepts.md#task" rel="noopener">
         <span class="kind">Task</span>
         <h3>Isolated execution</h3>
-        <p>Run untrusted agent code in a sandbox with CPU and memory limits. Cheap to create, suspend, and throw away.</p>
+        <p>Run untrusted agent code in a sandbox with CPU and memory limits. Cheap to create, suspend, and throw away.
+        </p>
       </a>
-      <a class="feature" href="{{ "docs/concepts/#workspace" | relURL }}">
+      <a class="feature" href="{{ .Site.Params.github }}/blob/main/docs/concepts.md#workspace" rel="noopener">
         <span class="kind">Workspace</span>
-        <h3>Start warm</h3>
-        <p>Pre-wire Git repos, MCP servers, and skill packages so every agent starts with its environment ready.</p>
+        <h3>Easy workspace setup</h3>
+        <p>List the Git repos, MCP servers, and skills an agent needs, or just describe the goal. AX sets it all up in
+          every sandbox before the task starts.</p>
       </a>
-      <a class="feature" href="{{ "docs/concepts/#gateway" | relURL }}">
+      <a class="feature" href="{{ .Site.Params.github }}/blob/main/docs/concepts.md#gateway" rel="noopener">
         <span class="kind">Gateway</span>
         <h3>Fenced network</h3>
-        <p>Lock outbound traffic down to an explicit allowlist of hosts and ports, such as your LLM provider and Git host.</p>
+        <p>Lock outbound traffic down to an explicit allowlist of hosts and ports, such as your LLM provider and Git
+          host.</p>
       </a>
-      <a class="feature" href="{{ "docs/concepts/#model" | relURL }}">
+      <a class="feature" href="{{ .Site.Params.github }}/blob/main/docs/concepts.md#model" rel="noopener">
         <span class="kind">Model</span>
-        <h3>One place for credentials</h3>
-        <p>Configure which LLM the platform uses, with the API key pulled from a Kubernetes secret. Rotate it with one apply.</p>
+        <h3>One place for config</h3>
+        <p>Configure models, model parameters, and secrets in one place. Rotate a key or pin a new model version with
+          one apply.</p>
       </a>
     </div>
 
-    <div class="verbs">
-      <div class="verb">
-        <code>ax suspend</code> <code>ax resume</code>
-        <p>Pause an idle agent and pick up exactly where it left off. The workspace volume is snapshotted and restored.</p>
-      </div>
-      <div class="verb">
-        <code>ax ssh</code>
-        <p>Shell into a running agent to see what it is doing. Look over its shoulder without leaving your terminal.</p>
-      </div>
-      <div class="verb">
-        <code>ax watch</code>
-        <p>Stream phase and condition transitions live, from <code>WorkspaceReady</code> through <code>Ready</code>.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -97,40 +83,21 @@ ax ssh test -- ls -al /workspace` -}}
   <div class="wrap">
     <p class="eyebrow">How it works</p>
     <h2>Built for billions of tasks, not thousands.</h2>
-    <p class="lede narrow">Storing millions of short-lived tasks as Kubernetes CRDs pushes etcd past its comfort zone. AX keeps its state in Redis and uses Redis Streams as the work queue between the API server and a horizontally scaled pool of controllers.</p>
-    <ol class="pipeline">
-      <li><code>ax apply</code><span>Validate and submit manifests over gRPC</span></li>
-      <li><code>ax-server</code><span>Persist to Redis and publish an event</span></li>
-      <li><code>ax-controller</code><span>Consume the stream and reconcile toward desired state</span></li>
-      <li><code>Agent Substrate</code><span>Provision the sandbox, assign a worker, apply egress policy</span></li>
-    </ol>
-    <p class="more"><a href="{{ "docs/architecture/" | relURL }}">Read about the architecture &rarr;</a></p>
-  </div>
-</section>
-
-<section class="section quickstart">
-  <div class="wrap">
-    <p class="eyebrow">Quick start</p>
-    <h2>From zero to a running agent in three steps.</h2>
-    <div class="steps">
-      <div class="step">
-        <span class="num">1</span>
-        <h3>Install the CLI</h3>
-        {{ highlight "go install github.com/google/ax/cmd/ax@latest" "bash" "" }}
+    <p class="lede narrow">AX runs on top of <a href="{{ .Site.Params.substrate }}" rel="noopener">Agent Substrate</a>, a runtime that scales to billions of actors in a single cluster. Many tasks are multiplexed onto each worker, and idle ones are suspended and resumed in under a second, so you pay for the agents that are actually thinking.</p>
+    <div class="scale-grid">
+      <div class="scale">
+        <strong>Billions of actors</strong>
+        <p>Per cluster. Every task is a lightweight actor, not a pod.</p>
       </div>
-      <div class="step">
-        <span class="num">2</span>
-        <h3>Deploy the control plane</h3>
-        {{ highlight "make deploy AX_IMAGE_REPO=<your-registry>" "bash" "" }}
-        <p>Needs a Kubernetes cluster, <a href="https://ko.build/" rel="noopener">ko</a>, and a reachable Agent Substrate Control API.</p>
+      <div class="scale">
+        <strong>Sub-second suspend and resume</strong>
+        <p>Idle agents are checkpointed and brought back exactly where they left off.</p>
       </div>
-      <div class="step">
-        <span class="num">3</span>
-        <h3>Run your first task</h3>
-        {{ highlight "ax apply -f examples/task.yaml\nax get tasks\nax ssh task123 -- ls -la /workspace" "bash" "" }}
+      <div class="scale">
+        <strong>Many tasks per worker</strong>
+        <p>Dense multiplexing turns waiting agents into spare capacity for the rest.</p>
       </div>
     </div>
-    <p class="more"><a class="btn btn-primary" href="{{ "docs/quickstart/" | relURL }}">Full quick start</a></p>
   </div>
 </section>
 
@@ -138,15 +105,85 @@ ax ssh test -- ls -al /workspace` -}}
   <div class="wrap">
     <p class="eyebrow">Documentation</p>
     <h2>Everything you need to declare, run, and inspect tasks.</h2>
-    <div class="card-grid">
-      {{ $docs := .Site.GetPage "docs" }}
-      {{ range $docs.RegularPages.ByWeight }}
-      <a class="card" href="{{ .RelPermalink }}">
-        <h3>{{ .Title }}</h3>
-        <p>{{ .Description }}</p>
-      </a>
-      {{ end }}
-    </div>
+
   </div>
 </section>
+
+<script>
+  (function () {
+    var el = document.getElementById('term');
+    if (!el) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var steps = [
+      {
+        cmd: 'ax apply -f task.yaml',
+        out: ['task.ax.io/test created']
+      },
+      {
+        cmd: 'ax watch task test',
+        out: ['Watching task default/test...',
+          '[10:42:01] Phase: Pending    Actor: test  WorkerIP:',
+          '[10:42:06] Phase: Running    Actor: test  WorkerIP: 10.20.3.67',
+          'Task reached terminal phase "Running".'],
+        slow: [0, 1200, 2200, 200]
+      },
+      { cmd: 'ax ssh test -- ps -o pid,cmd',
+        out: ['  PID CMD', '    1 /usr/local/bin/ax-task-runner', '   12 python agent.py'] },
+      { cmd: 'ax suspend task test', out: ['task.ax.io/test suspended'] }
+    ];
+
+    var code = el.querySelector('code');
+    var cursor;
+
+    function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+    function follow() { el.scrollTop = el.scrollHeight; }
+    function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+    function newLine() {
+      code.insertAdjacentHTML('beforeend', '<span class="prompt">$</span> <span class="cmd"></span>');
+      var cmd = code.lastElementChild;
+      cursor = document.createElement('span');
+      cursor.className = 'cursor';
+      code.appendChild(cursor);
+      follow();
+      return cmd;
+    }
+
+    async function typeCmd(text) {
+      var span = newLine();
+      for (var i = 0; i < text.length; i++) {
+        span.textContent += text[i];
+        follow();
+        await sleep(text[i] === ' ' ? 90 : 35 + Math.random() * 45);
+      }
+      await sleep(350);
+      cursor.remove();
+      code.insertAdjacentHTML('beforeend', '\n');
+    }
+
+    async function printOut(lines, slow) {
+      for (var i = 0; i < lines.length; i++) {
+        await sleep(slow && slow[i] != null ? slow[i] : 120);
+        code.insertAdjacentHTML('beforeend', '<span class="out">' + esc(lines[i]) + '</span>\n');
+        follow();
+      }
+    }
+
+    async function run() {
+      for (; ;) {
+        code.innerHTML = '';
+        el.scrollTop = 0;
+        for (var i = 0; i < steps.length; i++) {
+          await typeCmd(steps[i].cmd);
+          await printOut(steps[i].out, steps[i].slow);
+          await sleep(500);
+        }
+        newLine();
+        await sleep(4500);
+      }
+    }
+    run();
+  })();
+</script>
 {{ end }}

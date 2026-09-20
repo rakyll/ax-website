@@ -3,6 +3,7 @@ title: Concepts
 description: What a Task, Workspace, Gateway, and Model each do, and how a task moves through phases and conditions.
 weight: 20
 group: Start here
+source: docs/concepts.md
 ---
 
 Every AX resource lives in an **atespace**. The default atespace is `default`.

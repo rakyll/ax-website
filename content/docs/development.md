@@ -3,6 +3,7 @@ title: Development
 description: Build, test, and ship changes to AX itself.
 weight: 90
 group: Internals
+source: docs/development.md
 ---
 
 ## Prerequisites

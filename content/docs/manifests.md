@@ -3,6 +3,7 @@ title: Manifests
 description: Write your own YAML, with an annotated example of every kind.
 weight: 40
 group: Guides
+source: docs/manifests.md
 ---
 
 All four kinds can live in one multi-document YAML file. See [`examples/task.yaml`](https://github.com/google/ax/blob/main/examples/task.yaml) for a complete, working set.
