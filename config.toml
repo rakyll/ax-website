@@ -1,0 +1,38 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "AX"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term"]
+
+[params]
+  description = "Declare an agentic task in YAML. AX sandboxes it, wires up its workspace, fences its network, and helps running it at scale."
+  github = "https://github.com/google/ax"
+  substrate = "https://github.com/agent-substrate/substrate"
+  docGroups = ["Start here", "Guides", "Internals"]
+
+[menu]
+  # [[menu.main]]
+  #   name = "Docs"
+  #   url = "/docs/"
+  #   weight = 10
+  [[menu.main]]
+    name = "GitHub"
+    url = "https://github.com/google/ax"
+    weight = 20
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.highlight]
+    noClasses = false
+    lineNos = false
+    guessSyntax = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
+
+[outputs]
+  home = ["HTML"]
+  section = ["HTML"]
+  page = ["HTML"]
